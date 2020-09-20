@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const SearchBar = ({getRepos}) => {
 
@@ -14,6 +13,12 @@ const SearchBar = ({getRepos}) => {
         setSearch('');
     }
 
+    const onEnterKeyPress = e => {
+        if(e.key === 'Enter') {
+            onClickToGetRepos();
+        }
+    }
+
     return ( 
         <div className="search__container">
             <input
@@ -23,6 +28,7 @@ const SearchBar = ({getRepos}) => {
                 type="text"
                 placeholder="User"
                 onChange={handleChange}
+                onKeyPress={onEnterKeyPress}
             />
             <button
                 disabled={search === ''}
