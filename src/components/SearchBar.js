@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const SearchBar = () => {
+const SearchBar = ({getRepos}) => {
 
     const [search, setSearch] = useState('');
 
@@ -8,10 +9,16 @@ const SearchBar = () => {
         setSearch(e.target.value)
     }
 
+    const onClickToGetRepos = () => {
+        getRepos(search);
+        setSearch('');
+    }
+
     return ( 
         <div className="search__container">
             <input
                 name="searchInput"
+                value={search}
                 className="searchInput" 
                 type="text"
                 placeholder="User"
@@ -19,6 +26,7 @@ const SearchBar = () => {
             />
             <button
                 disabled={search === ''}
+                onClick={onClickToGetRepos}
             >
                 <i className="fa fa-search icons" aria-hidden="true"></i>
             </button>
