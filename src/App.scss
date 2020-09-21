@@ -1,0 +1,85 @@
+.App {
+  text-align: center;
+  transition: background-color 0.2s ease-in;
+  background-color: white;
+  padding: 0px;
+}
+
+.toogle__container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.title__container {
+  margin-top: 0;
+  padding: 30px;
+
+  h1{
+    margin-bottom: 10px;
+  }
+}
+
+a {
+  text-decoration:none;
+  color: rgb(55, 43, 226);
+}
+
+.data__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+}
+
+#toggle {
+  width: 50px;
+  display: flex;
+  padding: 5px;
+  background-color: rgb(44, 40, 40);
+  display: block;
+  border-radius: 1000px;
+  cursor: pointer;
+  box-shadow: 0px 5px 20px -10px #000000;
+  transition: background-color 0.2s ease-in;
+  
+  .toggle-inner {
+    width: 20px;
+    height: 15px;
+    background-color: white;
+    border-radius: 1000px;
+    transition: margin-left 0.2s ease-in, background-color 0.2s ease-in;
+
+    &.toggle-active {
+      margin-left: 20px;
+    }
+  }
+}
+
+.dark-mode {
+  color: white;
+
+  .App {
+    background-color: rgb(44, 40, 40);
+  }
+  
+  #toggle {
+    background-color: white;
+
+    .toggle-inner {
+      background-color: rgb(44, 40, 40);
+    }
+  }
+
+  a {
+    color: rgb(206, 197, 247);
+  }
+
+  .sk-circle .sk-child:before {
+    background-color: white;
+  }
+}
