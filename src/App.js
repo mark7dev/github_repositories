@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import Repos from './components/Repos';
@@ -11,6 +11,8 @@ function App() {
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const getRepos = user => {
     setLoading(true);
@@ -26,13 +28,16 @@ function App() {
           })
           .catch(error => {
             setLoading(false);
-            console.log(error);
+            setError(true);
+            setStates();
+            setErrorMessage(error.response.data.message);
           })
       })
       .catch(error => {
         setLoading(false);
-        console.log(error);
+        setError(true);
         setStates();
+        setErrorMessage(error.response.data.message);
       })
   }
 
@@ -50,9 +55,10 @@ function App() {
             getRepos={getRepos}
           />
           {loading ? <Spinner /> : null}
+          { error ? <h3>{errorMessage}</h3> : null}
           { !loading && userData ?
             <div>
-              <h3>{userData.login}</h3>
+              <h3>{user}</h3>
               <h3>{userData.public_repos}</h3>
             </div>
             : null
