@@ -11,11 +11,12 @@ function App() {
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(Boolean);
   const [errorMessage, setErrorMessage] = useState('');
 
   const getRepos = user => {
     setLoading(true);
+    setError(false);
     setStates();
     axios.get(`https://api.github.com/users/${user}`)
       .then(response => {
@@ -44,28 +45,39 @@ function App() {
   const setStates = () => {
     setRepositories([]);
     setUser('');
-    setUserData({});
+    setUserData(null);
   }
 
   return (
     <div className="App">
       <div className="container">
-          <h1>Github repositories</h1>
-          <SearchBar 
-            getRepos={getRepos}
-          />
-          {loading ? <Spinner /> : null}
-          { error ? <h3>{errorMessage}</h3> : null}
-          { !loading && userData ?
-            <div>
-              <h3>{user}</h3>
-              <h3>{userData.public_repos}</h3>
-            </div>
-            : null
-          }
-          <Repos 
-            repositories={repositories}
-          />
+          <div className="title">
+            <h1>Github repositories</h1>
+            <SearchBar 
+              getRepos={getRepos}
+            />
+          </div>
+          <div className="data__container">
+            {loading ? <Spinner /> : null}
+            { error ? 
+              <h1 className="error">{errorMessage}</h1>
+              : null }
+            { !loading && userData ?
+              <div>
+                <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+                  <h3>{user} <span>
+                      <i class="fa fa-github" aria-hidden="true"></i>
+                    </span>
+                  </h3>
+                </a>
+                <h3>Total repositories: {userData.public_repos}</h3>
+              </div>
+              : null
+            }
+            <Repos 
+              repositories={repositories}
+            />
+          </div>
         </div>
     </div>
   );

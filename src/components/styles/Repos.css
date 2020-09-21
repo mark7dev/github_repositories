@@ -1,0 +1,40 @@
+.repos__container {
+    width: 60%;
+    margin-bottom: 50px;
+}
+
+.repo__card {
+    border: 1px solid rgb(169, 169, 245);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform .3s;
+}
+
+.repo__card:hover {
+    background: rgb(169, 169, 245);
+    font-weight: bold;
+    transform: scale(1.07);
+    box-shadow: 10px 10px 5px grey;
+}
+
+@media screen and (max-width: 425px) {
+    .repos__container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .repos__container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .repos__container {
+        width: 70%;
+    }
+}
